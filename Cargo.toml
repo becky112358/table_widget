@@ -1,0 +1,9 @@
+[package]
+name = "druid_table"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+druid = { git = "https://github.com/becky112358/druid", branch = "scroll_snap", features = ["im"] }
