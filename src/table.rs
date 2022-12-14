@@ -144,7 +144,7 @@ impl<U: Data, M: Data + ListIter<U>> Widget<M> for Table<U, M> {
             header.lifecycle(ctx, event, &(), env);
         }
 
-        self.content.widget_mut().lifecycle(ctx, event, data, env);
+        self.content.lifecycle(ctx, event, data, env);
     }
 
     fn update(&mut self, ctx: &mut UpdateCtx, old_data: &M, data: &M, env: &Env) {
