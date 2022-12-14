@@ -44,7 +44,10 @@ fn main() {
         .window_size((700.0, 400.0));
 
     AppLauncher::with_window(window)
-        .launch(Trees { trees: Vector::new(), counter: 0 })
+        .launch(Trees {
+            trees: Vector::new(),
+            counter: 0,
+        })
         .expect("Failed to launch application");
 }
 
