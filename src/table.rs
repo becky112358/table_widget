@@ -97,7 +97,7 @@ impl<U: Data, M: Data + ListIter<U>> Table<U, M> {
 
 impl<U: Data, M: Data + ListIter<U>> Widget<M> for Table<U, M> {
     fn event(&mut self, ctx: &mut EventCtx, event: &Event, data: &mut M, env: &Env) {
-        self.content.widget_mut().event(ctx, event, data, env);
+        self.content.event(ctx, event, data, env);
 
         if let Event::MouseMove(mouse_event) = event {
             let expand_text_previous = self.expand_text.clone();
@@ -149,7 +149,7 @@ impl<U: Data, M: Data + ListIter<U>> Widget<M> for Table<U, M> {
 
     fn update(&mut self, ctx: &mut UpdateCtx, old_data: &M, data: &M, env: &Env) {
         if data.data_len() != old_data.data_len() {
-            self.content.widget_mut().update(ctx, old_data, data, env);
+            self.content.update(ctx, data, env);
         }
     }
 
