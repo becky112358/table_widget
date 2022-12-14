@@ -2,55 +2,18 @@ use druid::im::Vector;
 use druid::widget::{Button, Flex, ListIter};
 use druid::{AppLauncher, Data, Lens, Widget, WindowDesc};
 
+mod database;
+use database::TREES;
 mod table;
 use crate::table::{Table, TableDescription};
+mod types;
+use types::Tree;
 
 #[derive(Clone, Data, Lens)]
 struct Trees {
     trees: Vector<Tree>,
     counter: usize,
 }
-
-#[derive(Clone, Data, Lens)]
-struct Tree {
-    name_english: &'static str,
-    name_latin: &'static str,
-    typical_height_m: Option<u8>,
-    identifiable_features: &'static str,
-}
-
-const TREES: [Tree; 5] = [
-    Tree {
-        name_english: "Cedar",
-        name_latin: "Cedrus",
-        typical_height_m: None,
-        identifiable_features: "Scale leaves in spiral clusters",
-    },
-    Tree {
-        name_english: "Juniper",
-        name_latin: "Juniperus",
-        typical_height_m: Some(30),
-        identifiable_features: "Scale leaves; dark blue berry-like cones",
-    },
-    Tree {
-        name_english: "Oak",
-        name_latin: "Quercus",
-        typical_height_m: None,
-        identifiable_features: "Lobed leaves; Acorns",
-    },
-    Tree {
-        name_english: "Sycamore",
-        name_latin: "Platanus",
-        typical_height_m: None,
-        identifiable_features: "Thin, peeling reddish-brown bark",
-    },
-    Tree {
-        name_english: "Willow",
-        name_latin: "Salix",
-        typical_height_m: None,
-        identifiable_features: "Long drooping branches",
-    },
-];
 
 impl ListIter<Tree> for Trees {
     fn for_each(&self, mut cb: impl FnMut(&Tree, usize)) {
