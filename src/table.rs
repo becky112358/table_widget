@@ -176,10 +176,7 @@ impl<U: Data, M: Data + ListIter<U>> Widget<M> for Table<U, M> {
             }
         }
 
-        let content_layout = self.content.widget_mut().layout(ctx, bc, data, env);
-        // This is always zero. Why?
-        self.content
-            .layout(ctx, &BoxConstraints::tight(content_layout), data, env);
+        let content_layout = self.content.layout(ctx, &bc, data, env);
         origin.x = 0.0;
         origin.y = size.height;
         self.content.set_origin(ctx, data, env, origin);
