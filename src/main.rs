@@ -18,7 +18,7 @@ struct Trees {
 fn main() {
     let window = WindowDesc::new(build_root_widget())
         .title("Types of Trees")
-        .window_size((700.0, 400.0));
+        .window_size((700.0, 200.0));
 
     AppLauncher::with_window(window)
         .launch(Trees {
@@ -90,5 +90,5 @@ fn build_root_widget() -> impl Widget<Trees> {
     Flex::column()
         .with_child(button)
         .with_spacer(30.0)
-        .with_child(Table::new(table_description).lens(Trees::trees))
+        .with_flex_child(Table::new(table_description).lens(Trees::trees), 1.0)
 }
