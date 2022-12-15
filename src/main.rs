@@ -1,6 +1,6 @@
 use druid::im::Vector;
-use druid::widget::{Button, Flex, ListIter};
-use druid::{AppLauncher, Data, Lens, Widget, WindowDesc};
+use druid::widget::{Button, Flex};
+use druid::{AppLauncher, Data, Lens, Widget, WidgetExt, WindowDesc};
 
 mod database;
 use database::TREES;
@@ -13,29 +13,6 @@ use types::Tree;
 struct Trees {
     trees: Vector<Tree>,
     counter: usize,
-}
-
-impl ListIter<Tree> for Trees {
-    fn for_each(&self, mut cb: impl FnMut(&Tree, usize)) {
-        for (i, item) in self.trees.iter().enumerate() {
-            cb(item, i);
-        }
-    }
-
-    fn for_each_mut(&mut self, mut cb: impl FnMut(&mut Tree, usize)) {
-        for (i, item) in self.trees.clone().iter().enumerate() {
-            let mut new_item = item.to_owned();
-            cb(&mut new_item, i);
-
-            if !new_item.same(item) {
-                self.trees[i] = new_item;
-            }
-        }
-    }
-
-    fn data_len(&self) -> usize {
-        self.trees.len()
-    }
 }
 
 fn main() {
@@ -113,5 +90,5 @@ fn build_root_widget() -> impl Widget<Trees> {
     Flex::column()
         .with_child(button)
         .with_spacer(30.0)
-        .with_child(Table::new(table_description))
+        .with_child(Table::new(table_description).lens(Trees::trees))
 }
